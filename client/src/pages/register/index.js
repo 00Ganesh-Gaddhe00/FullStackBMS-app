@@ -2,27 +2,48 @@
 import React, { useEffect } from 'react';
 import Button from '../../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, message } from 'antd';
-// import { RegisterUser } from '../../apicalls/users';
+import { Form, message } from 'antd'; 
+import { RegisterUser } from '../../apicalls/user';
 // styles
 
 const Register = () => {
+
   const navigate = useNavigate();
 
-  // const onFinish = async (values) => {
-  //   try {
-  //     const response = await RegisterUser(values);
-  //     if (response.success) {
-  //       message.success(response.message);
-  //       console.log(response.message);
-  //     } else {
-  //       message.error(response.message);
-  //       console.error(response.message);
-  //     }
-  //   } catch (error) {
-  //     message.error(error);
+
+  // const onFinish = async(values)=>{
+  //   try{
+  //    const response = RegisterUser(values);
+  //    if(response.success){
+  //     message.success(response.success);
+  //     console.log(message.success);
+  //    }
+  //    else {
+  //     message.error(response.message);
+  //     console.log(response.message)
+  //    }
+  //   }catch(err){
+  //      message.error(err)
   //   }
-  // };
+  // }
+
+
+
+  const onFinish = async (values) => {
+    try {
+      const response = await RegisterUser(values);
+      if (response.success) {
+        message.success(response.message);
+        navigate('/login')
+        console.log(response.message);
+      } else {
+        message.error(response.message);
+        console.error(response.message);
+      }
+    } catch (error) {
+      message.error(error);
+    }
+  };
 
   // useEffect(() => {
   //   if (localStorage.getItem('token')) {
@@ -35,7 +56,7 @@ const Register = () => {
       <div className = "card p-3 w-400">
         <h1 className = "text - xl mb - 1">Welcome to Scaler Shows! Please Register</h1>
         <hr />
-        <Form layout = "vertical" className = "mt-1" onFinish = {() => {}}>
+        <Form layout = "vertical" className = "mt-1" onFinish = {onFinish}>
           <Form.Item
             label = "Name"
             name = "name"
