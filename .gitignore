@@ -1,11 +1,2 @@
-client/.gitignore
-client/package-lock.json
-client/package.json
-client/README.md
-client/public/index.html
-client/public/manifest.json
-client/public/robots.txt
-client/src/App.css
-client/src/App.js
-client/src/index.css
-client/src/index.js
+node_modules
+.env
