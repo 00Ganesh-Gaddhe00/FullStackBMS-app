@@ -35,5 +35,44 @@ router.post("/register", async (request, response) => {
   }
 });
 
+router.post("/login", async (request, response) => {
+  try {
+    const user = await User.findOne({ email: request.body.email });
+
+    if (!user) {
+      response.status(401).send({
+        success: false,
+        message: "Invalid Credentials",
+      });
+      return;
+    }
+
+    const validPassword = await bcrypt.compare(
+      request.body.password,
+      user.password
+    );
+    
+    if (!validPassword) {
+      response.status(401).send({
+        success: false,
+        message: "Invalid Credentials",
+      });
+      return;
+    }
+
+  response.status(200).send({
+    success:true,
+    message:"user Logged In"
+  })
+   
+  } catch (err) {
+    console.error(err);
+    response.status(500).send({
+      success: false,
+      message: "Something went wrong. Please, try again in sometime.",
+    });
+  }
+});
+
 
 module.exports = router;
