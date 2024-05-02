@@ -15,6 +15,7 @@ try{
   
   if(response.success){
     message.success(response.message)
+    localStorage.setItem('token' , response.data)
     navigate('/')
   }
   else{
@@ -45,11 +46,11 @@ catch(error){
   //    }
   // }
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className = "flex justify-center h-screen items-center bg-primary">

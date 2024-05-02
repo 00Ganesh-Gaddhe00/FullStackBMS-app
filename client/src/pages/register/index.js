@@ -45,11 +45,11 @@ const Register = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('token')) {
-  //     navigate('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className = "flex justify-center h-screen items-center bg-primary">

@@ -1,7 +1,10 @@
 const courseDetails = require('../models/userModel');
+const userModel = require('../models/userModel');
 const router = require('express').Router();
 const User = require("../models/userModel")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken");
+const authMiddleWare = require("../middlewares/authMiddleWare")
 
 router.post("/register", async (request, response) => {
   try {
@@ -60,9 +63,18 @@ router.post("/login", async (request, response) => {
       return;
     }
 
+     const token = jwt.sign({
+      userId:user._id, enailId:user.email
+     },
+     process.env.jwt_secret,
+     {expiresIn:"1d"}
+     )
+
+      console.log(token)
   response.status(200).send({
     success:true,
-    message:"user Logged In"
+    message:"user Logged In",
+    data:token,
   })
    
   } catch (err) {
@@ -74,5 +86,21 @@ router.post("/login", async (request, response) => {
   }
 });
 
+router.get('/get-current-user', authMiddleWare, async (req, res)=>{
+  try{
+    const user = await User.findById(req.body.userId).select("-password");
+    res.send({
+      success:true,
+      message:"User details fetched successfully",
+      data: user
+    })
+  }
+  catch(err){
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong"
+    })
+  }
+})
 
 module.exports = router;
