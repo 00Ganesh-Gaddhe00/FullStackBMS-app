@@ -8,14 +8,15 @@ require("./config/dbConfig");
 
 //routers
 const userRouter = require("./routes/userRoutes")
+const movieRouter = require("./routes/movieRoutes")
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
-
-app.use("/", userRouter);
+app.use("/api/user", userRouter);
+app.use("/api/movie", movieRouter);
 
 app.listen(8080, ()=>{
     console.log('server is running on http://localhost:8080')

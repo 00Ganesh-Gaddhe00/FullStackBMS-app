@@ -70,7 +70,7 @@ router.post("/login", async (request, response) => {
      {expiresIn:"1d"}
      )
 
-      console.log(token)
+      // console.log(token)
   response.status(200).send({
     success:true,
     message:"user Logged In",

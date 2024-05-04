@@ -1,6 +1,8 @@
 import React from "react";
 import { Tabs } from "antd";
 import PageTitle from "../../components/PageTitle"
+import MovieForm from "./MovieForm";
+import MoviesList from "./MoviesList";
 //  import MoviesList from "./MoviesList";
 //  import TheatresList from "./TheatresList";
 //  import UpcomingList from './UpcomingList'
@@ -12,7 +14,7 @@ function Admin() {
 
       <Tabs defaultActiveKey="movies">
         <Tabs.TabPane tab="Movies" key="movies">
-          Movie List
+          <MoviesList></MoviesList>
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="Theatres" key="theatres">
