@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import PageTitle from "../../components/PageTitle"
+import TheatresList from "./TheatersList";
 // import TheatresList from "./TheatresList";
 // import Bookings from "./Bookings";
 
@@ -19,8 +20,7 @@ return (
 
         <Tabs.TabPane tab="Apply for Theatre" key="2">
 
-          Theatre List
-
+         <TheatresList></TheatresList>
         </Tabs.TabPane>
 
       </Tabs>
