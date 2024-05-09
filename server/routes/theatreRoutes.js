@@ -1,7 +1,7 @@
 const express = require("express")
 const Theatre = require("../models/theatreModel")
 const authMiddleware = require("../middlewares/authMiddleWare")
-const User = require("../models/userModel")
+const Show = require("../models/showModel")
 const router = express.Router();
 
 
@@ -34,7 +34,7 @@ router.get("/get-all-theatres-by-owner", authMiddleware, async(req, res)=>{
       const theatres = await Theatre.find({ owner: req.body.userId });
       
           // Theatre.find({ owner: req.body.userId });
-          console.log(theatres);
+          // console.log(theatres);
           res.status(200).send({
             success:true,
             message:"Theatres fetched successfully",
@@ -59,7 +59,7 @@ router.get("/get-all-theatres", authMiddleware, async (_, response) => {
         data: theatres,
       });
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       response.status(500).send({
         success: false,
         message: "Something went wrong. Please, try again in sometime.",
@@ -99,5 +99,64 @@ router.delete("/delete-theatre", authMiddleware, async (request, response) => {
       });
     }
   });
+
+  //show API
+  router.post("/add-show", authMiddleware, async(req, res)=>{
+    try{
+      const newShow = new Show(req.body);
+      await newShow.save();
+      res.status(200).send({
+        success:true,
+        message:"Show added successfully"
+      })
+    }
+    catch(error){
+     res.status(500).send({
+      success:false,
+      message:error.message,
+     })
+    }
+  })
+
+router.post("/get-all-shows-by-theatre", authMiddleware, async(req, res)=>{
+  try{
+       const shows = await Show.find({theatre: req.body.theatreId}).populate("movie");
+       res.status(200).send({
+        success:true,
+        message:"Shows fetched successfully",
+        data:shows
+       })
+  }
+  catch(err){
+    res.status(500).send({
+      success: false,
+      message: err.message,
+    });
+  }
+})
+
+router.delete("/delete-show", authMiddleware, async (request, response) => {
+  try {
+    await Show.findByIdAndDelete(request.query.showId);
+    response.send({
+      success: true,
+      message: "Show Deleted Successfully",
+    });
+  } catch (err) {
+    response.status(500).send({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
   
   module.exports = router;

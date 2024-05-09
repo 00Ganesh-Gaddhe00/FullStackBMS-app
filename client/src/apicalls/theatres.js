@@ -44,3 +44,48 @@ export const AddTheatre = async (payload) => {
       return err;
     }
   }
+
+//shows API
+  export const AddShow = async (payload) => {
+    try {
+      const response = await axiosInstance.post("/api/theatre/add-show", payload);
+      return response.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  
+  export const GetAllShowsByTheatre = async (payload) => {
+    try {
+      const response = await axiosInstance.post(
+        "/api/theatre/get-all-shows-by-theatre",
+        payload
+      );
+      return response.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  
+  export const DeleteShow = async (showId) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/api/theatre/delete-show?showId=${showId}`
+      );
+      return response.data;
+    } catch (err) {
+      return err;
+    }
+  };
+  
+  export const GetAllTheatresByMovie = async (payload) => {
+    try {
+      const response = await axiosInstance.post(
+        "/api/theatre/get-all-theatres-by-movie",
+        payload
+      );
+      return response.data;
+    } catch (err) {
+      return err.response;
+    }
+  };

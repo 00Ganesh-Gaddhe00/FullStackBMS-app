@@ -5,7 +5,7 @@ import { HideLoading, ShowLoading } from "../../redux/loaderSlice.js";
 import { message, Table } from "antd";
 import TheatreForm from "./TheaterForm.js";
 import { DeleteTheatre, GetAllTheatresByOwner } from "../../apicalls/theatres";
-// import Shows from "./Shows";
+import Shows from "./Show";
 
 function TheatresList() {
   const { user } = useSelector((state) => state.users);
@@ -121,7 +121,6 @@ function TheatresList() {
 
   useEffect(() => {
     getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -149,12 +148,12 @@ function TheatresList() {
         />
       )}
 
-      {/* {openShowsModal && (
+      {openShowsModal && (
         <Shows
           setOpenShowsModal={setOpenShowsModal}
           theatre={selectedTheatre}
         />
-      )} */}
+      )}
     </div>
   );
 }
