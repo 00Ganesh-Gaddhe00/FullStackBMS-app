@@ -9,6 +9,7 @@ import Register from './pages/register';
 import Admin from "./pages/Admin";
 import Profile from "./pages/Profile";
 import TheatresForMovie from "./pages/TheatresForMovie";
+import BookShow from "./pages/BookShow";
 //styles
 import "./stylesheets/alignments.css";
 import "./stylesheets/custom.css";
@@ -36,6 +37,8 @@ function App() {
       <Route path="/admin" element={ <ProtectedRoute><Admin/></ProtectedRoute>} />
       <Route path="/profile" element={ <ProtectedRoute><Profile/></ProtectedRoute>} />
       <Route path="/movie/:id" element={ <ProtectedRoute><TheatresForMovie/></ProtectedRoute>} />
+      <Route path="/book-show/:id" element={ <ProtectedRoute><BookShow/></ProtectedRoute>} />
+
 
 
 
